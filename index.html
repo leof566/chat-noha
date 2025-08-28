@@ -108,19 +108,19 @@
 
     // --- CONFIGURACIÓN FIREBASE (PEGÁ LA TUYA AQUÍ) ---
     const firebaseConfig = {
-      apiKey: "PEGAR_AQUI_apiKey",
-      authDomain: "PEGAR_AQUI_authDomain",
-      projectId: "PEGAR_AQUI_projectId",
-      storageBucket: "PEGAR_AQUI_storageBucket",
-      messagingSenderId: "PEGAR_AQUI_messagingSenderId",
-      appId: "PEGAR_AQUI_appId"
-    };
-
+      const firebaseConfig = {
+      apiKey: "AIzaSyBHGD-h6dQKp5Ma8qTF6xqX5oFRINffseY",
+      authDomain: "chat-noha.firebaseapp.com",
+      projectId: "chat-noha",
+      storageBucket: "chat-noha.firebasestorage.app",
+      messagingSenderId: "92519369703",
+      appId: "1:92519369703:web:22a3cdb69542c0ad30cb42"
+};
     // Sala en Firestore: /rooms/familia (con members = [uid1, uid2, uid3])
-    const ROOM_ID = 'familia';
+    const ROOM_ID = 'chat-noha';
 
     // (Opcional) Clave VAPID pública para push reales (FCM)
-    const VAPID_KEY = 'PEGAR_AQUI_TU_VAPID_PUBLICA';
+    const VAPID_KEY = 'BAOsX0TX7-GnBCBFDhDaya6n4nrQ_UGUWQzrJJ-UhBO3tzWNItR5dUJlg8vHt9wNZKISyfamnJwWoHEb0GDtWxI';
 
     // --- INICIALIZACIÓN ---
     const app = initializeApp(firebaseConfig);
