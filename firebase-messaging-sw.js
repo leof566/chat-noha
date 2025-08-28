@@ -3,12 +3,12 @@ importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js
 importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js');
 
 firebase.initializeApp({
-  apiKey: "PEGAR_AQUI_apiKey",
-  authDomain: "PEGAR_AQUI_authDomain",
-  projectId: "PEGAR_AQUI_projectId",
-  storageBucket: "PEGAR_AQUI_storageBucket",
-  messagingSenderId: "PEGAR_AQUI_messagingSenderId",
-  appId: "PEGAR_AQUI_appId"
+  apiKey: "AIzaSyBHGD-h6dQKp5Ma8qTF6xqX5oFRINffseY",
+  authDomain: "chat-noha.firebaseapp.com",
+  projectId: "chat-noha",
+  storageBucket: "chat-noha.firebasestorage.app",
+  messagingSenderId: "92519369703",
+  appId: "1:92519369703:web:22a3cdb69542c0ad30cb42
 });
 
 const messaging = firebase.messaging();
