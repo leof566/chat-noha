@@ -23,3 +23,24 @@ messaging.onBackgroundMessage((payload) => {
   };
   self.registration.showNotification(title, options);
 });
+// ... tu initializeApp(...) y onBackgroundMessage(...) ya existente
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const APP_URL = 'https://leof566.github.io/chat-noha/'; // <-- poné TU URL exacta
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientsArr) => {
+      // Si ya hay una pestaña abierta, enfocarla
+      for (const client of clientsArr) {
+        if (client.url.startsWith(APP_URL) && 'focus' in client) {
+          return client.focus();
+        }
+      }
+      // Si no, abrir una nueva
+      if (self.clients.openWindow) {
+        return self.clients.openWindow(APP_URL + '?from=push');
+      }
+    })
+  );
+});
