@@ -36,6 +36,11 @@
   <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#000000">
 </head>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/chat-noha/firebase-messaging-sw.js');
+}
+</script>
 <body>
   <div class="card">
     <header>
