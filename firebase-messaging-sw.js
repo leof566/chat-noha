@@ -1,3 +1,6 @@
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));
+// (Opcional) no agregamos caché para no interferir con tu chat.
 // firebase-messaging-sw.js
 // Cargar SDKs "compat" (en un Service Worker NO uses import/export)
 importScripts('https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js');
