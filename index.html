@@ -33,14 +33,20 @@
     @media (min-width: 640px){ .settings { grid-template-columns: 1fr 1fr 1fr 1fr auto auto; align-items:end; } }
     label { font-size:12px; opacity:.8; display:block; margin-bottom:6px; }
   </style>
+
+  <!-- PWA -->
   <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#000000">
-    <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/chat-noha/firebase-messaging-sw.js');
-}
-</script>
+  <meta name="theme-color" content="#000000">
+
+  <!-- Registro ÚNICO del Service Worker (GitHub Pages) -->
+  <script>
+  if ('serviceWorker' in navigator) {
+    // Mismo archivo y mismo scope en toda la app
+    navigator.serviceWorker.register('/chat-noha/firebase-messaging-sw.js', { scope: '/chat-noha/' });
+  }
+  </script>
 </head>
+
 <body>
   <div class="card">
     <header>
@@ -121,7 +127,8 @@ if ('serviceWorker' in navigator) {
       storageBucket: "chat-noha.firebasestorage.app",
       messagingSenderId: "92519369703",
       appId: "1:92519369703:web:22a3cdb69542c0ad30cb42"
-};
+    };
+
     // Sala en Firestore: /rooms/familia (con members = [uid1, uid2, uid3])
     const ROOM_ID = 'chat-noha';
 
@@ -316,15 +323,21 @@ if ('serviceWorker' in navigator) {
       try {
         if (!(await isSupported())) return alert('Tu navegador no soporta FCM Web Push.');
         if (!VAPID_KEY || VAPID_KEY.startsWith('PEGAR_AQUI')) return alert('Configurá tu VAPID_KEY pública primero.');
-        const reg = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
+
+        // Usar el SW YA REGISTRADO (mismo scope y archivo)
+        const reg = await navigator.serviceWorker.ready;
+
         const messaging = getMessaging(app);
         const perm = await Notification.requestPermission();
         if (perm !== 'granted') return alert('Permiso de notificaciones denegado.');
+
         const token = await getToken(messaging, { vapidKey: VAPID_KEY, serviceWorkerRegistration: reg });
         if (!token) return alert('No se pudo obtener token FCM');
+
         const uid = auth.currentUser.uid;
         await setDoc(doc(db, 'users', uid, 'tokens', token), { createdAt: serverTimestamp() });
         alert('Push activadas en este dispositivo.');
+
         onMessage(messaging, (payload) => {
           const title = payload?.notification?.title || 'Nuevo mensaje';
           const body = payload?.notification?.body || '';
@@ -336,3 +349,4 @@ if ('serviceWorker' in navigator) {
   </script>
 </body>
 </html>
+
